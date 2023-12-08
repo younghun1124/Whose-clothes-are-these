@@ -14,7 +14,7 @@ def compare_histograms(hist1, hist2):
     return cosine(hist1, hist2)
 
 # Specify the folder path
-folder_path = 'path/to/your/image/folder'
+folder_path = 'images'
 
 # Retrieve and filter image files
 image_extensions = ['.jpg', '.jpeg', '.png', '.bmp']
@@ -22,9 +22,9 @@ image_paths = [os.path.join(folder_path, f) for f in os.listdir(folder_path) if 
 
 # Extract histograms
 histograms = [extract_color_histogram(path) for path in image_paths]
+target_histogram = extract_color_histogram()
+# Compare each images
 
-# Compare each pair of images
-pairs = combinations(range(len(histograms)), 2)
 similarities = {pair: compare_histograms(histograms[pair[0]], histograms[pair[1]]) for pair in pairs}
 
 # Find the most similar pair
