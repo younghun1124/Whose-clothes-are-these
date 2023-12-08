@@ -22,10 +22,10 @@ image_paths = [os.path.join(folder_path, f) for f in os.listdir(folder_path) if 
 
 # Extract histograms
 histograms = [extract_color_histogram(path) for path in image_paths]
-target_histogram = extract_color_histogram()
+target_histogram = extract_color_histogram('target.png')
 # Compare each images
 
-similarities = {pair: compare_histograms(histograms[pair[0]], histograms[pair[1]]) for pair in pairs}
+similarities = [compare_histograms(target_histogram, histogram) for histogram in histograms]
 
 # Find the most similar pair
 most_similar_pair = min(similarities, key=similarities.get)
