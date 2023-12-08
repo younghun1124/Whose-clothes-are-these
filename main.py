@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 from scipy.spatial.distance import cosine
-from itertools import combinations
+
 
 def extract_color_histogram(image_path):
     image = cv2.imread(image_path)
