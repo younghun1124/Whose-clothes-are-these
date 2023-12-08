@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import os
 from scipy.spatial.distance import cosine
 from itertools import combinations
 
@@ -12,8 +13,12 @@ def extract_color_histogram(image_path):
 def compare_histograms(hist1, hist2):
     return cosine(hist1, hist2)
 
-# Paths to your images
-image_paths = ['image1.jpg', 'image2.jpg', 'image3.jpg', ...]
+# Specify the folder path
+folder_path = 'path/to/your/image/folder'
+
+# Retrieve and filter image files
+image_extensions = ['.jpg', '.jpeg', '.png', '.bmp']
+image_paths = [os.path.join(folder_path, f) for f in os.listdir(folder_path) if os.path.splitext(f)[1].lower() in image_extensions]
 
 # Extract histograms
 histograms = [extract_color_histogram(path) for path in image_paths]
