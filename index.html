@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload Form</title>
+</head>
+<body>
+    <h1>Upload a File</h1>
+    
+    <form action="http://127.0.0.1:5000/upload" method="post" enctype="multipart/form-data">
+        <!-- Input for selecting a file -->
+        <input type="file" name="fileToUpload" id="fileToUpload" accept=".jpg, .jpeg, .png">
+        
+        <!-- Submit button -->
+        <input type="submit" value="Upload File">
+    </form>
+</body>
+</html>
