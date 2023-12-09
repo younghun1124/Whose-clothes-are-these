@@ -1,37 +1,55 @@
+import os
 import cv2
 import numpy as np
-import os
-from scipy.spatial.distance import cosine
+import torch
+import torch.nn as nn
+from torchvision import models, transforms
 
-def extract_color_histogram(image_path):
-    
+# Function to extract features using a pre-trained ResNet model
+def extract_resnet_features(image_path, model):
     img_array = np.fromfile(image_path, np.uint8)
-    image = cv2.imdecode(img_array, cv2.IMREAD_COLOR) #cv.imread 한글 경로 인식 안되는 문제를 해결하기 위해 넘파이 array로 먼저 받아오기
-    
-    
-    if image is None:
-        raise ValueError(f"Unable to load image at path: {image_path}")
-    histogram = cv2.calcHist([image], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
-    cv2.normalize(histogram, histogram)
-    return histogram.flatten()
+    image = cv2.imdecode(img_array, cv2.IMREAD_COLOR) #cv.imread 한글 경로 인식 안되는 문제를 해결하기 위해 넘파이 array로 먼저 받아오기    
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert to RGB
+    image = cv2.resize(image, (224, 224))  # Resize to match ResNet input size
+    image = transforms.ToTensor()(image).unsqueeze(0)  # Convert to PyTorch tensor
+    image = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(image)  # Normalize
+    features = model(image)
+    return features.flatten().detach().numpy()
 
-def compare_histograms(hist1, hist2):
-    return cosine(hist1, hist2)
+# Load pre-trained ResNet model for feature extraction
+model = models.resnet50(pretrained=True)
+model = nn.Sequential(*list(model.children())[:-1])
+
+# Set the model to evaluation mode
+model.eval()
+
+# Define the folder containing pre-stored clothing photos
 current_script_directory = os.getcwd()
-# Specify the folder path
-folder_path = os.path.join(current_script_directory, 'images')
-target_path = os.path.join(current_script_directory, 'target.jpg')
-# Retrieve and filter image files
-image_extensions = ['.jpg', '.jpeg', '.png', '.bmp']
-image_paths = [os.path.join(folder_path, f) for f in os.listdir(folder_path) if os.path.splitext(f)[1].lower() in image_extensions]
+folder_path = os.path.join(current_script_directory, 'images2')
 
-# Extract histograms
-histograms = [extract_color_histogram(path) for path in image_paths]
-target_histogram = extract_color_histogram(target_path)
 
-# Compare each image with the target
-similarities = [compare_histograms(target_histogram, histogram) for histogram in histograms]
+# Load and extract features for pre-stored clothing photos
+pre_stored_features = {}
+for file_name in os.listdir(folder_path):
+    file_path = os.path.join(folder_path, file_name)
+    image_features = extract_resnet_features(file_path, model)
+    pre_stored_features[file_name] = image_features
 
-# Find the most similar image
-most_similar_image_index = np.argmin(similarities)
-print(f"The most similar image to target is: {image_paths[most_similar_image_index]} with a similarity score of {similarities[most_similar_image_index]}")
+# Define the target clothing photo
+target_photo_path = os.path.join(current_script_directory, 'target.jpg')
+
+# Extract features for the target clothing photo
+target_features = extract_resnet_features(target_photo_path, model)
+
+# Calculate similarity between the target photo and pre-stored photos
+similarities = {}
+for file_name, features in pre_stored_features.items():
+    similarity = np.dot(target_features, features) / (np.linalg.norm(target_features) * np.linalg.norm(features))
+    similarities[file_name] = similarity
+
+# Find the closest pre-stored clothing photo
+closest_photo = max(similarities, key=similarities.get)
+similarity_score = similarities[closest_photo]
+ranked_photos = sorted(similarities.items(), key=lambda x: x[1], reverse=True)
+for rank, (photo, similarity_score) in enumerate(ranked_photos, start=1):
+    print(f"Rank {rank}: {photo} (Similarity Score: {similarity_score})")
