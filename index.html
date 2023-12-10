@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
     <title>File Upload Form</title>
 </head>
 <body>
     <h1>비슷한 옷 찾기</h1>
-    
     <form action="http://127.0.0.1:5000/compare" method="post" enctype="multipart/form-data">
-        <!-- Input for selecting a file -->
-        <input type="file" name="fileToUpload" id="fileToUpload" accept=".jpg, .jpeg, .png">
-        
-        <!-- Submit button -->
-        <input type="submit" value="Upload File">
+        <input type="file" name="fileToUpload" id="fileToUpload" accept=".jpg, .jpeg, .png" onchange="previewFile()">
+        <img id="previewImg" src="" alt="Image preview" style="max-width: 500px; max-height: 500px;">
+        <input type="submit" value="이거 누구 옷이야?">
     </form>
+
     <h1>옷 등록하기</h1>
     <form action="http://127.0.0.1:5000/upload" method="post" enctype="multipart/form-data">
         <label for="fileToUpload">Select a file:</label>
-        <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*"><br><br>
+        <input type="file" name="fileToUpload" id="fileToUpload2" accept="image/*" onchange="previewFile2()"><br><br>
+        <img id="previewImg2" src="" alt="Image preview" style="max-width: 500px; max-height: 500px;">
         
         <label for="nameSelect">Select name:</label>
         <select name="nameSelect" id="nameSelect">
