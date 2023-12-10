@@ -4,7 +4,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torchvision import models, transforms
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,render_template
 
 app = Flask(__name__)
 
@@ -37,6 +37,7 @@ for file_name in os.listdir(folder_path):
     image_features = extract_resnet_features(image)
     pre_stored_features[file_name] = image_features
 
+
 @app.route('/upload', methods=['POST'])
 def upload_target_image():
     try:
@@ -55,17 +56,16 @@ def upload_target_image():
                 similarity = np.dot(target_features, features) / (np.linalg.norm(target_features) * np.linalg.norm(features))
                 similarities[file_name] = similarity
 
-            # Rank the pre-stored clothing photos by similarity
+            # 유사도 순으로 정렬
             ranked_photos = sorted(similarities.items(), key=lambda x: x[1], reverse=True)
+            response_data = [{"photo": photo, "similarity_score": float(score)} for photo, score in ranked_photos]
 
-            # Prepare the response
-            response_data = [{"photo": photo, "similarity_score": float(similarity_score)} for photo, similarity_score in ranked_photos]
-            print(response_data)
-            
-            return jsonify({"results": response_data})
+            # HTML 템플릿 렌더링
+            return render_template('results.html', results=response_data)
 
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return str(e)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
