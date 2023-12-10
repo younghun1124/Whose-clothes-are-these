@@ -4,7 +4,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torchvision import models, transforms
-from flask import Flask, request, jsonify,render_template
+from flask import Flask, request, jsonify,render_template,send_from_directory
 
 app = Flask(__name__)
 
@@ -37,7 +37,9 @@ for file_name in os.listdir(folder_path):
     image_features = extract_resnet_features(image)
     pre_stored_features[file_name] = image_features
 
-
+@app.route('/images2/<filename>')
+def send_image(filename):
+    return send_from_directory("images2", filename)
 @app.route('/upload', methods=['POST'])
 def upload_target_image():
     try:
