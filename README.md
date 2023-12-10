@@ -3,7 +3,7 @@
 ![image](https://github.com/younghun1124/Whose-clothes-are-these/assets/83543030/252d21b5-4fc7-45cf-bed8-fe8f08a5ae8e)
 
 
-This site uses the Residual Neural Network (ResNet) model to find the most similar clothing photos among pre-stored images.
+This web page uses the Residual Neural Network (ResNet) model to find the most similar clothing photos among pre-stored images.
 
 ## Problem Situation
 
@@ -76,7 +76,7 @@ This Project is MIT licensed, as found in the LICENSE file.
 ![image](https://github.com/younghun1124/Whose-clothes-are-these/assets/83543030/ef28765d-6a23-42b4-9c61-152cfbb71c43)
 
 
-미리 저장된 옷 사진 중 가장 비슷한 옷 사진을 Residual Neural Network (a.k.a. Residual Network, ResNet) 모델을 이용해 찾아주는 사이트 입니다.  
+미리 저장된 옷 사진 중 가장 비슷한 옷 사진을 Residual Neural Network (a.k.a. Residual Network, ResNet) 모델을 이용해 찾아주는 웹 페이지 입니다.  
 
 ## 문제상황  
 
