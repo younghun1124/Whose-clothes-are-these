@@ -47,7 +47,8 @@
 사진의 방향이 다르고 비슷한 색의 옷이 많음에도 불구하고 정확히 판별하였음을 알 수 있습니다.
 
 ### 옷 등록하기
-<img width="273" alt="image" src="https://github.com/younghun1124/Whose-clothes-are-these/assets/83543030/0f93f18c-3f98-4bf4-82f2-7b6b220baf74">
+<img width="413" alt="image" src="https://github.com/younghun1124/Whose-clothes-are-these/assets/83543030/e40eb6e4-3362-4f33-bcef-cc3defae66ec">
+
 1. 파일 선택버튼을 누르고 업로드할 옷 사진을 선택합니다.  
 2. 옷의 주인을 선택합니다.
 3. Upload image 버튼을 눌러 옷을 등록합니다. 이미지는 서버내 images2 폴더에 옷의 주인 이름으로 저장되고, 같은 이름의 이미지가 이미 저장되어있다면 {주인이름+number} 형태로 등록됩니다.
