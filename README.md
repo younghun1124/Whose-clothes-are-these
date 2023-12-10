@@ -69,5 +69,5 @@
 
 ```styles.css```:웹페이지 전반에 이용되는 css 파일입니다.
 ## 참조  
-He, Kaiming; Zhang, Xiangyu; Ren, Shaoqing; Sun, Jian (10 Dec 2015). Deep Residual Learning for Image Recognition. arXiv:![1512.03385](https://arxiv.org/abs/1512.03385)
+He, Kaiming; Zhang, Xiangyu; Ren, Shaoqing; Sun, Jian (10 Dec 2015). Deep Residual Learning for Image Recognition. arXiv:[1512.03385](https://arxiv.org/abs/1512.03385)
 [opencv 한글경로 인식 안되는 문제](https://bskyvision.com/entry/python-cv2imread-%ED%95%9C%EA%B8%80-%ED%8C%8C%EC%9D%BC-%EA%B2%BD%EB%A1%9C-%EC%9D%B8%EC%8B%9D%EC%9D%84-%EB%AA%BB%ED%95%98%EB%8A%94-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95)
