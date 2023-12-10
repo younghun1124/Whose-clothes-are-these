@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torchvision import models, transforms
+from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify,render_template,send_from_directory
 
 app = Flask(__name__)
@@ -41,6 +42,35 @@ for file_name in os.listdir(folder_path):
 def send_image(filename):
     return send_from_directory("images2", filename)
 @app.route('/upload', methods=['POST'])
+def upload_image():
+    print("Route hit")  # Debugging
+    try:
+        target_image = request.files['fileToUpload']
+        print("File received:", target_image.filename)  # Debugging
+        name_option = request.form['nameSelect']
+
+        if target_image:
+            filename = secure_filename(target_image.filename)
+            base_name, file_extension = os.path.splitext(filename)
+
+            # 이미지 이름 생성 (중복 처리)
+            counter = 1
+            new_filename = f"{name_option}{file_extension}"
+            while os.path.exists(os.path.join(folder_path, new_filename)):
+                new_filename = f"{name_option}_{counter}{file_extension}"
+                counter += 1
+
+            # 이미지 저장
+            save_path = os.path.join(folder_path, new_filename)
+            target_image.save(save_path)
+
+            # 추가 로직 ...
+
+            return "File uploaded and saved!"
+
+    except Exception as e:
+        return str(e)
+@app.route('/compare', methods=['POST'])
 def upload_target_image():
     try:
         target_image = request.files['fileToUpload']
