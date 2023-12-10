@@ -1,6 +1,6 @@
 # Whose-clothes-are-these  
 
-미리 저장된 옷 사진 중 가장 비슷한 옷 사진을 찾아주는 소프트웨어입니다.  
+미리 저장된 옷 사진 중 가장 비슷한 옷 사진을 Residual Neural Network (a.k.a. Residual Network, ResNet) 모델을 이용해 찾아주는 사이트 입니다.  
 
 ## 문제상황  
 
@@ -54,6 +54,14 @@
 
 ### 주의사항
 서버 파일인 main.py 파일을 flask run 명령어로 실행하면 바로 실행되지 않습니다. main.py 파일의 이름을 app.py 로 수정하거나 set FLASK_APP=main 명령어를 입력한 뒤 실행해야합니다.
+
+### 파일 설명
+```templates/results.html```:이미지가 유사한 정도에 따라 images2 폴더 내에 있는 옷 이미지를 보여주는 html 문서입니다.
+
+```main.py```:이미지의 특징을 추출하여 유사도를 비교한뒤 사용자의 http 요청에 따라 결과를 반환해주는 flask 서버 파일입니다. 사용자가 새로 이미지를 업로드 하면 images2 폴더에 저장하는 기능도 포함합니다.
+
+```index.html```:사용자가 옷 사진을 업로드하고 비교할 수 있는 html 인터페이스입니다.
+
 
 ## 참조  
 
