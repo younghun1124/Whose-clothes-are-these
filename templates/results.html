@@ -5,13 +5,13 @@
 </head>
 <body>
     <h1>Results</h1>
-    <ul>
+    <ol>
         {% for item in results %}
             <li>
                 <img src="{{ url_for('send_image', filename=item.photo) }}" alt="{{ item.photo }}" style="width:100px; height:auto;">
-                {{ item.photo }}: {{ item.similarity_score }}
+                주인:{{ item.photo }} 유사도: {{ item.similarity_score }}
             </li>
         {% endfor %}
-    </ul>
+    </ol>
 </body>
 </html>
