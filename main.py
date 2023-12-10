@@ -65,7 +65,11 @@ def upload_image():
             target_image.save(save_path)
 
             # 추가 로직 ...
-
+            # 이미지의 특징 추출 및 저장
+            img_array = np.fromfile(save_path, np.uint8)
+            image = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            image_features = extract_resnet_features(image)
+            pre_stored_features[new_filename] = image_features
             return "File uploaded and saved!"
 
     except Exception as e:
