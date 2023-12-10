@@ -1,4 +1,73 @@
-# Whose-clothes-are-these  
+
+# Whose Clothes Are These?
+
+This site uses the Residual Neural Network (ResNet) model to find the most similar clothing photos among pre-stored images.
+
+## Problem Situation
+
+### “Where are all my clothes?”
+Clothes often get mixed up, leading to instances where they end up unused in a sibling's closet for months.
+With children grown up, it becomes challenging to differentiate between the clothes of different family members when doing laundry, especially when not everyone is at home.
+
+## Implementation Method
+
+1. **Flask Python Server**: Allows all family members to use the service on their smartphones.
+2. **Image Preprocessing**: Uses OpenCV for preprocessing and torchvision's pretrained resnet50 model to extract features from clothing photos.
+3. **Feature Comparison**:
+   Code for comparison: 
+   ```python
+   similarity = np.dot(target_features, features) / (np.linalg.norm(target_features) * np.linalg.norm(features))
+   ```
+   <img width="481" alt="image" src="https://github.com/younghun1124/Whose-clothes-are-these/assets/83543030/212e63c3-0848-4513-b9c0-8e48087cf917">
+
+   
+4. **Results Display**: Shows photos of clothes and their owners' information in order of similarity in an HTML list.
+
+## How to Use
+
+### Find the Owner of Your Clothes
+
+1. From the Find Similar Clothes menu, select a file.
+2. Click the “Whose clothes is this?” button to start the comparison.
+
+#### Selected File Image
+![Selected File Image](https://github.com/younghun1124/Whose-clothes-are-these/assets/83543030/64fc1062-5fbf-4b96-b0f3-75282348f12b)
+
+#### Results
+![Comparison Results](https://github.com/younghun1124/Whose-clothes-are-these/assets/83543030/81356ea7-b02b-45ea-9b94-b32e66dc83f1)
+
+#### Most Similar Images
+![Most Similar Images](https://github.com/younghun1124/Whose-clothes-are-these/assets/83543030/77aa238a-7c8b-4bae-826f-5b7446a5130d)
+
+### Register Clothes
+
+1. Click the file selection button and choose the photo you want to upload.
+2. Select the owner of the clothes.
+3. Click the Upload Image button to register the clothes.
+
+#### Successful Upload Message
+![Upload Success](https://github.com/younghun1124/Whose-clothes-are-these/assets/83543030/cca1cdda-4b28-4b9d-81a8-617a671d9681)
+
+### Caution
+To run the server, rename `main.py` to `app.py` or use the command `set FLASK_APP=main` before running.
+
+### File Description
+
+- `templates/results.html`: Shows clothes images based on similarity.
+- `main.py`: Flask server file for image feature extraction and similarity comparison.
+- `index.html`: User interface for uploading and comparing clothes photos.
+- `script.js`: JavaScript for previewing uploaded clothes photos.
+- `styles.css`: CSS for the web page.
+
+## Reference
+- He, Kaiming, et al. (10 Dec 2015). "Deep Residual Learning for Image Recognition." arXiv: [1512.03385](https://arxiv.org/abs/1512.03385)
+- [Problem with OpenCV not recognizing Korean path](https://bskyvision.com/entry/python-cv2imread-%ED%95%9C%EA%B8%80-%ED%8C%8C%EC%9D%BC-% EA%B2%BD%EB%A1%9C-%EC%9D%B8%EC%8B%9D%EC%9D%84-%EB%AA%BB%ED%95%98%EB%8A%94- %EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95)
+
+<hr>
+# 아래는 한글 버전의 README 입니다
+
+
+# 이거 누구 옷이야?  
 
 미리 저장된 옷 사진 중 가장 비슷한 옷 사진을 Residual Neural Network (a.k.a. Residual Network, ResNet) 모델을 이용해 찾아주는 사이트 입니다.  
 
@@ -7,9 +76,6 @@
 ### "내 옷은 다 어디갔지?"  
 
 자꾸 섞이는 옷들 때문에 내 옷이 동생 방의 옷장에 수개월간 잠들어 있는 경우가 있습니다.  
-
-### "이거 누구 옷이야?"  
-
 자식들이 다 크고나니 빨래를 갤 때 엄마와 딸, 아빠와 아들, 딸과 아들의 옷이 헷갈릴 때가 있습니다.  
 빨래를 갤 때마다 집에 가족이 모두 있는 것이 아니기 때문에 물어보기도 곤란합니다.  
 
@@ -69,5 +135,8 @@
 
 ```styles.css```:웹페이지 전반에 이용되는 css 파일입니다.
 ## 참조  
-He, Kaiming; Zhang, Xiangyu; Ren, Shaoqing; Sun, Jian (10 Dec 2015). Deep Residual Learning for Image Recognition. arXiv:[1512.03385](https://arxiv.org/abs/1512.03385)  
-[opencv 한글경로 인식 안되는 문제](https://bskyvision.com/entry/python-cv2imread-%ED%95%9C%EA%B8%80-%ED%8C%8C%EC%9D%BC-%EA%B2%BD%EB%A1%9C-%EC%9D%B8%EC%8B%9D%EC%9D%84-%EB%AA%BB%ED%95%98%EB%8A%94-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95)
+- He, Kaiming; Zhang, Xiangyu; Ren, Shaoqing; Sun, Jian (10 Dec 2015). Deep Residual Learning for Image Recognition. arXiv:[1512.03385](https://arxiv.org/abs/1512.03385)  
+- [opencv 한글경로 인식 안되는 문제](https://bskyvision.com/entry/python-cv2imread-%ED%95%9C%EA%B8%80-%ED%8C%8C%EC%9D%BC-%EA%B2%BD%EB%A1%9C-%EC%9D%B8%EC%8B%9D%EC%9D%84-%EB%AA%BB%ED%95%98%EB%8A%94-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95)
+
+
+
