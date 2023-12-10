@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>Similarity Results</title>
+    
 </head>
 <body>
-    <h1>Results</h1>
+    <h1>유사도 순위!</h1>
     <ol>
         {% for item in results %}
             <li>
@@ -14,4 +15,86 @@
         {% endfor %}
     </ol>
 </body>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+    
+    /* 제목 스타일링 */
+    h1 {
+        color: #333;
+        text-align: center; /* 가운데 정렬 추가 */
+        margin-top: 20px; /* 상단 여백 추가 */
+        margin-bottom: 20px; /* 하단 여백 추가 */
+    }
+    
+    /* 양식 스타일링 */
+    form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: 20px auto;
+    }
+    
+    /* 입력 필드 스타일링 */
+    input[type="file"] {
+        border: 1px solid #ddd;
+        padding: 8px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    /* 선택 필드 스타일링 */
+    select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+    
+    /* 버튼 스타일링 */
+    input[type="submit"] {
+        background-color: #5C6BC0;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+    
+    input[type="submit"]:hover {
+        background-color: #3F51B5;
+    }
+    
+    ol {
+       
+        padding: 0;
+    }
+    
+    li {
+        background: #fff;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    img {
+        border-radius: 4px;
+        margin-right: 15px;
+    }
+    
+    .item-details {
+        display: inline-block;
+        vertical-align: top;
+    }
+</style>
 </html>
